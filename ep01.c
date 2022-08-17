@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 typedef struct block{
-	short b, n;
-	long val;
+	void *b, *n;
+	void *val;
 }block;
 struct block mem[500];
 
