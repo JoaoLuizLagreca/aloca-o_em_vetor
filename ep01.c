@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 typedef struct block{
-	void *b, *n;
+	struct block *b, *n;
 	void *val;
 }block;
 struct block mem[500];
