@@ -4,7 +4,7 @@ typedef struct block{
 	struct block *b, *n;
 	void *val;
 }block;
-struct block mem[500];
+void* mem[16384]; //16Kb
 
 /* PROTÓTIPOS */
 void * aloca(size_t nbytes);
