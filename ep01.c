@@ -19,6 +19,13 @@ void initMemory(){
 	for(i=0; i<cabecalho_tam; i++)
 		mem[i]=0x00;
 }
+int my_ceil(double n){
+        if ( n-((int)n)  >= 0.00005f )
+                return ((int)n)+1;
+	
+        return (int)n;
+}
+
 
 /* PROTÓTIPOS */
 void * aloca(size_t nbytes);
