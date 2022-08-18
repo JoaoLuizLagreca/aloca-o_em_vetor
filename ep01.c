@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define MEM_SIZE 16384
+#define MEM_SIZE 16384 /* 16Kb */
 
 typedef struct block{
 	struct block *b, *n;
@@ -11,7 +11,7 @@ typedef struct part{
 	size_t size;
 }part;
 
-void* mem[MEM_SIZE]; //16Kb
+void* mem[MEM_SIZE];
 const size_t cabecalho_tam = MEM_SIZE/4;
 void initMemory(){
 	/* Garanta que o cabeçalho não tenha lixo no início do programa */
