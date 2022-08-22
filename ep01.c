@@ -27,18 +27,22 @@ int my_ceil(double n){
 }
 
 /* Estrutura de dados */
-struct part * enderecoNaTabela(void * pos){
+struct part * enderecoNaTabela(void * pos, size_t size){
 
 	int i;
-	struct part * bloco, *ultB;
+	struct part * bloco;
+	void *ultB;
+	void *ultP = pos+size-1;
 	for(i=0; i<cabecalho_tam; i+=sizeof(part)){
 		if(mem[i]==0x00)
 			continue;
 
 		bloco = (struct part *) &mem[i];
 		ultB = (bloco->pos)+bloco->size-1;
-		printf("%d - %x + %x <= %x\n", i, bloco->pos, ultB, pos);
-		if(bloco->pos <= pos && ultB >= pos)
+		if(
+			(pos<bloco->pos && ultP>=bloco->pos)|| /* Não sei porque o compilador falar que o ultP ou o ultP são inteiros, sendo que estão funcionando como ponteiros, mas enfim...*/
+			(pos>=bloco->pos && pos<=ultB)
+		)
 			return bloco;
 	}
 
