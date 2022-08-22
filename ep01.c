@@ -11,7 +11,7 @@ typedef struct part{
 	size_t size;
 }part;
 
-void* mem[MEM_SIZE];
+char* mem[MEM_SIZE];
 const size_t cabecalho_tam = MEM_SIZE/4;
 void initMemory(){
 	/* Garanta que o cabeçalho não tenha lixo no início do programa */
@@ -31,12 +31,12 @@ struct part * enderecoNaTabela(void * pos){
 
 	int i;
 	struct part * bloco, *ultB;
-	for(i=0; i<cabecalho_tam; i+=sizeof(part)/sizeof(void*)){
+	for(i=0; i<cabecalho_tam; i+=sizeof(part)){
 		if(mem[i]==0x00)
 			continue;
 
 		bloco = (struct part *) &mem[i];
-		ultB = (bloco->pos)+sizeof(void *)*(bloco->size-1);
+		ultB = (bloco->pos)+bloco->size-1;
 		printf("%d - %x + %x <= %x\n", i, bloco->pos, ultB, pos);
 		if(bloco->pos <= pos && ultB >= pos)
 			return bloco;
