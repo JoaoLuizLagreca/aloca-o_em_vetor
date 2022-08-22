@@ -26,6 +26,25 @@ int my_ceil(double n){
         return (int)n;
 }
 
+/* Estrutura de dados */
+struct part * enderecoNaTabela(void * pos){
+
+	int i;
+	struct part * bloco, *ultB;
+	for(i=0; i<cabecalho_tam; i+=sizeof(part)/sizeof(void*)){
+		if(mem[i]==0x00)
+			continue;
+
+		bloco = (struct part *) &mem[i];
+		ultB = (bloco->pos)+sizeof(void *)*(bloco->size-1);
+		printf("%d - %x + %x <= %x\n", i, bloco->pos, ultB, pos);
+		if(bloco->pos <= pos && ultB >= pos)
+			return bloco;
+	}
+
+	return NULL;
+
+}
 
 /* PROTÓTIPOS */
 void * aloca(size_t nbytes);
