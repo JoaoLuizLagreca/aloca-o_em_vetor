@@ -11,7 +11,7 @@ typedef struct part{
 	size_t size;
 }part;
 
-char* mem[MEM_SIZE];
+char mem[MEM_SIZE];
 const size_t cabecalho_tam = MEM_SIZE/4;
 void initMemory(){
 	/* Garanta que o cabeçalho não tenha lixo no início do programa */
