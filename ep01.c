@@ -40,7 +40,7 @@ struct part * enderecoNaTabela(void * pos, size_t size){
 		bloco = (struct part *) &mem[i];
 		ultB = (bloco->pos)+bloco->size-1;
 		if(
-			(pos<bloco->pos && ultP>=bloco->pos)|| /* Não sei porque o compilador falar que o ultP ou o ultP são inteiros, sendo que estão funcionando como ponteiros, mas enfim...*/
+			(pos<bloco->pos && ultP>=bloco->pos)||
 			(pos>=bloco->pos && pos<=ultB)
 		)
 			return bloco;
