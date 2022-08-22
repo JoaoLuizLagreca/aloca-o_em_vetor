@@ -95,6 +95,12 @@ void * aloca(size_t nbytes){
 	return NULL;
 }
 
+void libera(void *p){
+	struct part * b  = enderecoNaTabela(p, 1);
+	if (b!=NULL)
+		b->pos=0x00; /* Define bloco do cabeçalho como livre caso encontrado */
+}
+
 int main(){
 	initMemory();
 	printf("Olá mundo!");
