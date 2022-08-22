@@ -55,7 +55,44 @@ void * aloca(size_t nbytes);
 void   libera(void *p);
 
 void * aloca(size_t nbytes){
+	char * lastAddress=&mem[cabecalho_tam];
+	struct part *ult = NULL;
 	
+	BUSCA_BLOCO:{
+
+		if(
+			lastAddress>=&mem[MEM_SIZE-1] /*Se chegar até o último bloco da memória, significa que não foi possível encontrar um espaço livre, retorne NULL*/
+			|| lastAddress<&mem[cabecalho_tam] /*Ou, por segurança, interrompa se o último endereço for menor que o endereço reservado de dados inicial*/
+		)
+			return NULL;
+
+		ult = enderecoNaTabela(lastAddress, nbytes);
+		if(ult == NULL) /* Vá para o parágrafo de alocação caso encontre um bloco livre */
+			goto ALOCACAO;
+
+		/* Procure no próximo bloco após o final indicado pelo cabeçalho */
+		lastAddress = ult->pos + ult->size;
+		goto BUSCA_BLOCO;
+		
+	}
+
+	ALOCACAO:{
+
+		/* Encontrar espaço livre no cabeçalho */
+		int i;
+		for (i=0; i<cabecalho_tam; i+=sizeof(part)){
+			if(mem[i]==0x00){
+				/* Criar e armazenar informação de particionamento */
+				ult = (struct part *)&mem[i];
+				ult->pos = lastAddress;
+				ult->size = nbytes;
+
+				return lastAddress; //Retorna o endereço da memória
+			}
+		}
+	}
+
+	return NULL;
 }
 
 int main(){
