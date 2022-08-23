@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #define MEM_SIZE 16384 /* 16Kb */
 
@@ -89,7 +90,18 @@ int fila_incluir(fila *f, const char frase[]){
 
 	return id;
 }
-void fila_alterar(fila *f, const int id, const char frase[]);
+void fila_alterar(fila *f, const int id, const char frase[]){
+	if(f->fim == NULL || (f->fim)->id<id)
+		return; /* Cancele caso o ID seja inválido ou a lista esteja vazia */
+
+	struct no *n = f->comeco;
+	while(n->prox!=NULL){
+		if (n->id==id){
+			strncpy(n->frase, frase, sizeof(n->frase));
+			return;
+		}
+	}
+}
 void fila_excluir(fila *f, const int id);
 void fila_listar(const fila *f);
 
