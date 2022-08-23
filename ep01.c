@@ -118,11 +118,13 @@ void fila_excluir(fila *f, const int id){
 	/* Altera o laço anterior e próximo dos nós vizinhos */
 	struct no *nAnt = (struct no *)n->ant;
 	struct no *nProx = (struct no *)n->prox;
-	nAnt->prox = n->prox;
-	nProx->ant = n->ant;
+	if(nAnt!=NULL)
+		nAnt->prox = n->prox;
+	if(nProx!=NULL)
+		nProx->ant = n->ant;
 
 	/* Subtrai os próximos IDs por 1 */
-	struct no *n2 = n;
+	struct no *n2 = n->prox;
 	while(n2 != NULL){
 		n2->id--;
 		n2 = n2->prox;
