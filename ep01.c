@@ -121,8 +121,12 @@ void fila_excluir(fila *f, const int id){
 	struct no *nProx = (struct no *)n->prox;
 	if(nAnt!=NULL)
 		nAnt->prox = n->prox;
+	else
+		f->comeco = n->prox;
 	if(nProx!=NULL)
 		nProx->ant = n->ant;
+	else
+		f->fim = n->ant;
 
 	libera(n); /* Libera o nó excluído da nossa memória */
 
