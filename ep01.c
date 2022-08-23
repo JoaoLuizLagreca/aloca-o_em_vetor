@@ -94,6 +94,7 @@ void fila_alterar(fila *f, const int id, const char frase[]){
 			strncpy(n->frase, frase, sizeof(n->frase));
 			return;
 		}
+		n = n->prox;
 	}
 }
 void fila_excluir(fila *f, const int id);
