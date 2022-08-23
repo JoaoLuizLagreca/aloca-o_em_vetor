@@ -97,7 +97,7 @@ void fila_alterar(fila *f, const int id, const char frase[]){
 		return; /* Cancele caso o ID seja inválido ou a lista esteja vazia */
 
 	struct no *n = f->comeco;
-	while(n->prox!=NULL){
+	while(n!=NULL){
 		if (n->id==id){
 			strncpy(n->frase, frase, sizeof(n->frase));
 			return;
