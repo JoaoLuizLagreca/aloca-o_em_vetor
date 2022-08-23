@@ -2,10 +2,6 @@
 
 #define MEM_SIZE 16384 /* 16Kb */
 
-typedef struct block{
-	struct block *b, *n;
-	void *val;
-}block;
 typedef struct part{
 	void * pos;
 	size_t size;
@@ -18,12 +14,6 @@ void initMemory(){
 	int i;
 	for(i=0; i<cabecalho_tam; i++)
 		mem[i]=0x00;
-}
-int my_ceil(double n){
-        if ( n-((int)n)  >= 0.00005f )
-                return ((int)n)+1;
-	
-        return (int)n;
 }
 
 /* Estrutura de dados */
