@@ -56,7 +56,39 @@ struct part * enderecoNaTabela(void * pos, size_t size){
 
 }
 
-int fila_incluir(fila *f, const char frase[]);
+int fila_incluir(fila *f, const char frase[]){
+	int id=0;
+
+	struct no *n = (struct no*)aloca(sizeof(struct no));
+	if(f->comeco==NULL){
+		/*
+		 fila vazia
+		 O novo nó será o começo e o fim da fila
+		*/
+		f->comeco = n;
+		f->fim = n;
+	}else{
+		/* 
+		 Fila já tem algo 
+		 Vamos mudar que o novo nó é o último da fila e o próximo nó do último anterior é o novo nó
+		*/
+		id=(f->fim)->id+1;
+		(f->fim)->prox=n;
+		n->ant=f->fim;
+		f->fim=n;
+	}
+	n->id = id;
+
+	/* Passar o texto para o novo nó */
+	int i;
+	for(i=0; i<sizeof(n->frase); i++){
+		n->frase[i] = frase[i];
+		if(frase[i]=='\0')
+			break; /* Interrompe a iteração se o caractere i da frase é um fim */
+	}
+
+	return id;
+}
 void fila_alterar(fila *f, const int id, const char frase[]);
 void fila_excluir(fila *f, const int id);
 void fila_listar(const fila *f);
