@@ -80,13 +80,7 @@ int fila_incluir(fila *f, const char frase[]){
 	}
 	n->id = id;
 
-	/* Passar o texto para o novo nó */
-	int i;
-	for(i=0; i<sizeof(n->frase); i++){
-		n->frase[i] = frase[i];
-		if(frase[i]=='\0')
-			break; /* Interrompe a iteração se o caractere i da frase é um fim */
-	}
+	strncpy(n->frase, frase, sizeof(n->frase)); /* Passar o texto para o novo nó */
 
 	return id;
 }
