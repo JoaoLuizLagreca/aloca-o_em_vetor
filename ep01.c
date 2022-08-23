@@ -200,7 +200,7 @@ int main(){
 	int l, t;
 	t=0;
 	for(l=0; l<10; l++){
-		char * temp = aloca(255);
+		char * temp = aloca(50);
 		asprintf(&temp, "Teste %d", t);
 		fila_incluir(f, temp);
 		libera(temp);
@@ -211,7 +211,7 @@ int main(){
 			fila_excluir(f, l);
 	
 	for(l=0; l<20; l++){
-		char * temp = aloca(255);
+		char * temp = aloca(50);
 		asprintf(&temp, "Teste %d", t);
 		fila_incluir(f, temp);
 		libera(temp);
