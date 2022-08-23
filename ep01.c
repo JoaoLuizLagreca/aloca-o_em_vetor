@@ -64,6 +64,9 @@ int fila_incluir(fila *f, const char frase[]){
 	if (n==NULL)
 		return -1; /* Retorne erro caso não seja possível alocar */
 
+	n->ant = NULL;
+	n->prox = NULL;
+
 	if(f->comeco==NULL){
 		/*
 		 fila vazia
