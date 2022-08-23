@@ -56,9 +56,9 @@ struct part * enderecoNaTabela(void * pos, size_t size){
 
 }
 
-int fila_incluir(const fila *f, const char frase[]);
-void fila_alterar(const fila *f, const int id, const char frase[]);
-void fila_excluir(const fila *f, const int id);
+int fila_incluir(fila *f, const char frase[]);
+void fila_alterar(fila *f, const int id, const char frase[]);
+void fila_excluir(fila *f, const int id);
 void fila_listar(const fila *f);
 
 
