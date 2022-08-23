@@ -18,7 +18,7 @@ typedef struct part{
 typedef struct no{
 	void * ant;
 	int    id;
-	char   frase[255];
+	char   frase[50];
 	void * prox;
 }no;
 typedef struct fila{
