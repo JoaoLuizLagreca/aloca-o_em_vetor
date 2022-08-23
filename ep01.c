@@ -2,6 +2,12 @@
 
 #define MEM_SIZE 16384 /* 16Kb */
 
+
+/* PROTÓTIPOS */
+void * aloca(size_t nbytes);
+void   libera(void *p);
+
+
 typedef struct part{
 	void * pos;
 	size_t size;
@@ -55,10 +61,6 @@ void fila_alterar(const fila *f, const int id, const char frase[]);
 void fila_excluir(const fila *f, const int id);
 void fila_listar(const fila *f);
 
-
-/* PROTÓTIPOS */
-void * aloca(size_t nbytes);
-void   libera(void *p);
 
 void * aloca(size_t nbytes){
 	char * lastAddress=&mem[cabecalho_tam];
