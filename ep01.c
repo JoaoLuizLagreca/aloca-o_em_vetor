@@ -107,15 +107,11 @@ void fila_excluir(fila *f, const int id){
 	if(f->fim == NULL || (f->fim)->id<id)
 		return; /* Cancele caso o ID seja inválido ou a lista esteja vazia */
 
-	int i;
 	struct no *n = f->comeco;
-	for(i=0; i<id; i++)
-		n = n->prox;
-
-	if(n->id!=id){
-		/* Redundância, mas impede que o programa delete um nó errado por um bug */
-		printf("AVISO: ID do nó encontrado não corresponde ao ID procurado!\n");
-		return;
+	while(n->id!=id){
+		n=n->prox;
+		if(n==NULL)
+			return;
 	}
 
 	/* Altera o laço anterior e próximo dos nós vizinhos */
@@ -125,13 +121,6 @@ void fila_excluir(fila *f, const int id){
 		nAnt->prox = n->prox;
 	if(nProx!=NULL)
 		nProx->ant = n->ant;
-
-	/* Subtrai os próximos IDs por 1 */
-	struct no *n2 = n->prox;
-	while(n2 != NULL){
-		n2->id--;
-		n2 = n2->prox;
-	}
 
 	libera(n); /* Libera o nó excluído da nossa memória */
 
