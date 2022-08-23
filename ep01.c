@@ -194,5 +194,37 @@ void libera(void *p){
 
 int main(){
 	initMemory();
-	printf("Olá mundo!");
+
+	struct fila *f = (struct fila *)aloca(sizeof(struct fila));
+	
+	int l, t;
+	t=0;
+	for(l=0; l<10; l++){
+		char * temp = aloca(255);
+		asprintf(&temp, "Teste %d", t);
+		fila_incluir(f, temp);
+		libera(temp);
+		t++;
+	}
+	for(l=0;l<10;l++)
+		if(l%3==0)
+			fila_excluir(f, l);
+	
+	for(l=0; l<20; l++){
+		char * temp = aloca(255);
+		asprintf(&temp, "Teste %d", t);
+		fila_incluir(f, temp);
+		libera(temp);
+		t++;
+	}
+	
+	for(l=0;l<30;l++)
+		if(l%6==0)
+			fila_excluir(f, l);
+
+	fila_incluir(f, "Se não mudar esse texto você pode me dar 0 TwT"); /* Porfavor, não. */
+	fila_alterar(f, 29, "Me dá 10 OwO");
+
+	fila_listar(f);
+
 }
