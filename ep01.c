@@ -97,7 +97,37 @@ void fila_alterar(fila *f, const int id, const char frase[]){
 		n = n->prox;
 	}
 }
-void fila_excluir(fila *f, const int id);
+void fila_excluir(fila *f, const int id){
+	if(f->fim == NULL || (f->fim)->id<id)
+		return; /* Cancele caso o ID seja inválido ou a lista esteja vazia */
+
+	int i;
+	struct no *n = f->comeco;
+	for(i=0; i<id; i++)
+		n = n->prox;
+
+	if(n->id!=id){
+		/* Redundância, mas impede que o programa delete um nó errado por um bug */
+		printf("AVISO: ID do nó encontrado não corresponde ao ID procurado!\n");
+		return;
+	}
+
+	/* Altera o laço anterior e próximo dos nós vizinhos */
+	struct no *nAnt = (struct no *)n->ant;
+	struct no *nProx = (struct no *)n->prox;
+	nAnt->prox = n->prox;
+	nProx->ant = n->ant;
+
+	/* Subtrai os próximos IDs por 1 */
+	struct no *n2 = n;
+	while(n2 != NULL){
+		n2->id--;
+		n2 = n2->prox;
+	}
+
+	libera(n); /* Libera o nó excluído da nossa memória */
+
+}
 void fila_listar(const fila *f){
 	if(f->fim==NULL){
 		printf("A fila está vazia!\n");
