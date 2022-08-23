@@ -6,6 +6,16 @@ typedef struct part{
 	void * pos;
 	size_t size;
 }part;
+typedef struct no{
+	void * ant;
+	int    id;
+	char   frase[255];
+	void * prox;
+}no;
+typedef struct fila{
+	struct no *comeco;
+	struct no *fim;
+}fila;
 
 char mem[MEM_SIZE];
 const size_t cabecalho_tam = MEM_SIZE/4;
@@ -39,6 +49,12 @@ struct part * enderecoNaTabela(void * pos, size_t size){
 	return NULL;
 
 }
+
+int fila_incluir(const fila *f, const char frase[]);
+void fila_alterar(const fila *f, const int id, const char frase[]);
+void fila_excluir(const fila *f, const int id);
+void fila_listar(const fila *f);
+
 
 /* PROTÓTIPOS */
 void * aloca(size_t nbytes);
