@@ -97,7 +97,18 @@ void fila_alterar(fila *f, const int id, const char frase[]){
 	}
 }
 void fila_excluir(fila *f, const int id);
-void fila_listar(const fila *f);
+void fila_listar(const fila *f){
+	if(f->fim==NULL){
+		printf("A fila está vazia!\n");
+		return;
+	}
+
+	struct no *n = f->comeco;
+	while(n!=NULL){
+		printf("Nó #%d: %s\n", n->id, n->frase);
+		n=n->prox;
+	}
+}
 
 
 void * aloca(size_t nbytes){
